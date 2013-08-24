@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GeographyHulk</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript">
+  function twitter_cb (user) {
+    $(function () {
+      var tweet = user.status;
+      $('#tweet').html('<a href="http://twitter.com/GeographyHulk/status/'+tweet.id_str+'">'+tweet.text+'</a>');
+    });
+  }
+</script>
+<style type="text/css" media="screen">
+  img {
+    border: 0;
+  }
+  #content {
+    width: 600px;
+    height: 600px;
+    margin: 50px auto;
+    position: relative;
+  }
+  #tweet {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    position: absolute;
+    width: 200px;
+    bottom: 397px;
+    left: 327px;
+    padding: 10px;
+    background: white;
+  }
+  #tweet a {
+    text-decoration: none;
+    color: #6C4989;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+  #bubble1 {
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    position: absolute;
+    background: white;
+    width: 15px;
+    height: 15px;
+    bottom: 375px;
+    left: 338px;
+    background: white;
+  }
+  #bubble2 {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    position: absolute;
+    background: white;
+    width: 10px;
+    height: 10px;
+    bottom: 361px;
+    left: 331px;
+    background: white;
+  }
+</style>
+<script type="text/javascript" src="http://api.twitter.com/1/users/show.json?screen_name=geographyhulk&amp;callback=twitter_cb"></script>
+</head>
+<body>
+  <div id="content">
+    <a href="http://twitpic.com/3i5vf6"><img src="hulk.jpg" width="600" height="600"></a>
+    <div id="tweet"></div>
+    <div id="bubble1"></div>
+    <div id="bubble2"></div>
+  </div>
+</body>
+</html>
