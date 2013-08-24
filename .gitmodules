@@ -1,0 +1,3 @@
+[submodule "codebird"]
+	path = codebird
+	url = git@github.com:mynetx/codebird-js.git

@@ -2,15 +2,6 @@
 <html>
 <head>
 <title>GeographyHulk</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-<script type="text/javascript">
-  function twitter_cb (user) {
-    $(function () {
-      var tweet = user.status;
-      $('#tweet').html('<a href="http://twitter.com/GeographyHulk/status/'+tweet.id_str+'">'+tweet.text+'</a>');
-    });
-  }
-</script>
 <style type="text/css" media="screen">
   img {
     border: 0;
@@ -63,14 +54,38 @@
     background: white;
   }
 </style>
-<script type="text/javascript" src="http://api.twitter.com/1/users/show.json?screen_name=geographyhulk&amp;callback=twitter_cb"></script>
 </head>
 <body>
   <div id="content">
     <a href="http://twitpic.com/3i5vf6"><img src="hulk.jpg" width="600" height="600"></a>
-    <div id="tweet"></div>
+    <div id="tweet">
+      <a href="http://twitter.com/GeographyHulk">HULK THINKING...</a>
+    </div>
     <div id="bubble1"></div>
     <div id="bubble2"></div>
   </div>
+<script src="codebird/sha1.js" type="text/javascript" charset="utf-8"></script>
+<script src="codebird/codebird.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  function setStatus(text, href) {
+    document.getElementById('tweet').innerHTML =
+        '<a href="' + href + '">' + text + '</a>';
+  }
+  
+  var cb = new Codebird();
+  cb.setConsumerKey("E81sAybW5Gkt1NnKdipA", "gh80eS2VuHUnHOOoudMbLJIUS7wJZDkgxVtFjeE2g");
+  cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAGQLTAAAAAAALDnkTAIAcAX2Zcjv3JG0TVKCDtY%3Dw0Uy4rW24xL4gofsQNugKMINnNlH5GGOEdMjogc9yw");
+  
+  var app_only_auth = true;
+  cb.__call(
+    "users_show",
+    {screen_name: "geographyhulk"},
+    function (reply) {
+      var tweet = reply.status;
+      setStatus(tweet.text, 'http://twitter.com/GeographyHulk/status/' + tweet.id_str);
+    },
+    app_only_auth
+  );
+</script>
 </body>
 </html>
